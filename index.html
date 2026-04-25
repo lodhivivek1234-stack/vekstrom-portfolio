@@ -94,31 +94,30 @@
     .hero-cta{
       display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;
     }
-   .btn{
-  padding:.88rem 1.35rem;
-  border-radius:999px;
-  border:1px solid #2c2c2c;
-  font-weight:600;
-  transition:.25s ease;
-  font-size:.95rem;
-  background:transparent;
-  color:#fff;
-  box-shadow:none;              /* default no glow */
-}
+    .btn{
+      padding:.88rem 1.35rem;
+      border-radius:999px;
+      border:1px solid #2c2c2c;
+      font-weight:600;
+      transition:.25s ease;
+      font-size:.95rem;
+      background:transparent;
+      color:#fff;
+      box-shadow:none;
+    }
 
-.btn-primary{
-  border-color:#2c2c2c;         /* remove pre-highlight */
-}
+    .btn-primary{
+      border-color:#2c2c2c;
+    }
 
-/* Hover/focus pe hi glow */
-.btn:hover,
-.btn:focus-visible{
-  transform:translateY(-2px);
-  border-color:#00FF88;
-  background:rgba(0,255,136,.08);
-  box-shadow:0 0 22px rgba(0,255,136,.35), inset 0 0 14px rgba(0,255,136,.12);
-  outline:none;
-}
+    .btn:hover,
+    .btn:focus-visible{
+      transform:translateY(-2px);
+      border-color:#00FF88;
+      background:rgba(0,255,136,.08);
+      box-shadow:0 0 22px rgba(0,255,136,.35), inset 0 0 14px rgba(0,255,136,.12);
+      outline:none;
+    }
 
     /* Focus */
     .focus-grid{
@@ -320,18 +319,38 @@
       padding:1rem;
     }
     .modal.open{display:flex}
+
     .modal-content{
       width:min(1000px,95vw);
-      aspect-ratio:16/9;
+      max-height:90vh;
       border:1px solid #2d2d2d;
       border-radius:14px;
       overflow:hidden;
       background:#000;
       position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
+
     .modal-content video,.modal-content iframe{
-      width:100%;height:100%;border:0;object-fit:cover;
+      width:100%;
+      height:100%;
+      border:0;
+      object-fit:contain;
+      background:#000;
     }
+
+    .modal-content.is-portrait{
+      width:min(420px,95vw);
+      height:min(90vh, calc(95vw * 16 / 9));
+    }
+
+    .modal-content.is-landscape{
+      width:min(1100px,95vw);
+      height:min(90vh, calc(95vw * 9 / 16));
+    }
+
     .close{
       position:absolute;top:.55rem;right:.55rem;
       width:34px;height:34px;border-radius:50%;
@@ -422,7 +441,7 @@
       <div class="work-grid" id="workGrid">
         <article class="card" data-category="Short Form Edits" data-type="local" data-src="assets/shortform/sf-01.mp4">
           <div class="thumb">
-            <video muted loop playsinline preload="none">
+            <video autoplay muted loop playsinline preload="metadata">
               <source src="assets/shortform/sf-01.mp4" type="video/mp4" />
             </video>
           </div>
@@ -434,7 +453,7 @@
 
         <article class="card" data-category="Short Form Edits" data-type="local" data-src="assets/shortform/sf-02.mp4">
           <div class="thumb">
-            <video muted loop playsinline preload="none">
+            <video autoplay muted loop playsinline preload="metadata">
               <source src="assets/shortform/sf-02.mp4" type="video/mp4" />
             </video>
           </div>
@@ -446,7 +465,7 @@
 
         <article class="card" data-category="Motion Graphics" data-type="local" data-src="assets/motion/mo-01.mp4">
           <div class="thumb">
-            <video muted loop playsinline preload="none">
+            <video autoplay muted loop playsinline preload="metadata">
               <source src="assets/motion/mo-01.mp4" type="video/mp4" />
             </video>
           </div>
@@ -458,7 +477,7 @@
 
         <article class="card" data-category="Motion Graphics" data-type="local" data-src="assets/motion/mo-02.mp4">
           <div class="thumb">
-            <video muted loop playsinline preload="none">
+            <video autoplay muted loop playsinline preload="metadata">
               <source src="assets/motion/mo-02.mp4" type="video/mp4" />
             </video>
           </div>
@@ -470,7 +489,7 @@
 
         <article class="card" data-category="Trading / Chart Edits" data-type="local" data-src="assets/trading/tr-01.mp4">
           <div class="thumb">
-            <video muted loop playsinline preload="none">
+            <video autoplay muted loop playsinline preload="metadata">
               <source src="assets/trading/tr-01.mp4" type="video/mp4" />
             </video>
           </div>
@@ -482,7 +501,7 @@
 
         <article class="card" data-category="Trading / Chart Edits" data-type="local" data-src="assets/trading/tr-02.mp4">
           <div class="thumb">
-            <video muted loop playsinline preload="none">
+            <video autoplay muted loop playsinline preload="metadata">
               <source src="assets/trading/tr-02.mp4" type="video/mp4" />
             </video>
           </div>
@@ -494,7 +513,7 @@
 
         <article class="card" data-category="Cinematic" data-type="local" data-src="assets/cinematic/ci-01.mp4">
           <div class="thumb">
-            <video muted loop playsinline preload="none">
+            <video autoplay muted loop playsinline preload="metadata">
               <source src="assets/cinematic/ci-01.mp4" type="video/mp4" />
             </video>
           </div>
@@ -506,7 +525,7 @@
 
         <article class="card" data-category="Cinematic" data-type="local" data-src="assets/cinematic/ci-02.mp4">
           <div class="thumb">
-            <video muted loop playsinline preload="none">
+            <video autoplay muted loop playsinline preload="metadata">
               <source src="assets/cinematic/ci-02.mp4" type="video/mp4" />
             </video>
           </div>
@@ -589,11 +608,9 @@
     },{threshold:.14});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-    // Card hover preview (local videos)
-    document.querySelectorAll('.card').forEach(card=>{
-      const v = card.querySelector('video');
-      card.addEventListener('mouseenter', ()=>{ if(v) v.play().catch(()=>{}); });
-      card.addEventListener('mouseleave', ()=>{ if(v){ v.pause(); v.currentTime=0; } });
+    // Ensure all card videos try to play immediately
+    document.querySelectorAll('.card video').forEach(v=>{
+      v.play().catch(()=>{});
     });
 
     // Filters
@@ -613,12 +630,37 @@
 
     // Modal player
     const modal = document.getElementById('modal');
+    const modalContent = document.querySelector('.modal-content');
     const player = document.getElementById('player');
     const closeModal = document.getElementById('closeModal');
+
+    function setModalRatioClass(type, src){
+      modalContent.classList.remove('is-portrait','is-landscape');
+
+      if(type === 'youtube'){
+        modalContent.classList.add('is-landscape');
+        return;
+      }
+
+      const probe = document.createElement('video');
+      probe.preload = 'metadata';
+      probe.src = src;
+
+      probe.onloadedmetadata = () => {
+        const isPortrait = probe.videoHeight > probe.videoWidth;
+        modalContent.classList.add(isPortrait ? 'is-portrait' : 'is-landscape');
+      };
+
+      probe.onerror = () => {
+        modalContent.classList.add('is-landscape');
+      };
+    }
 
     function openModal(type,src){
       modal.classList.add('open');
       modal.setAttribute('aria-hidden','false');
+
+      setModalRatioClass(type, src);
 
       if(type === 'youtube'){
         player.innerHTML = `
@@ -638,6 +680,7 @@
     function closePlayer(){
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden','true');
+      modalContent.classList.remove('is-portrait','is-landscape');
       player.innerHTML = '';
     }
 
