@@ -235,191 +235,186 @@
       transform:translateY(-1px);
     }
 
-    .steps{
+    /* ===== Process (UPDATED to match your reference image) ===== */
+    .process-head{
+      display:flex;
+      flex-direction:column;
+      gap:.55rem;
+      margin-bottom:1.4rem;
+    }
+    .process-title{
+      font-size:clamp(1.8rem,3.2vw,2.6rem);
+      font-weight:800;
+      letter-spacing:.01em;
+      margin:0;
+    }
+    .process-underline{
+      width:140px;
+      height:2px;
+      background:linear-gradient(90deg, var(--accent), transparent);
+      opacity:.9;
+    }
+    .process-grid{
       display:grid;
       grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:14px;
+      gap:18px;
+    }
+    .process-card{
       position:relative;
+      border-radius:18px;
+      padding:1.25rem 1.25rem 1.4rem;
+      background:rgba(20,20,20,.62);
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow:
+        0 18px 40px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.04);
+      backdrop-filter: blur(8px);
+      transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+      min-height:120px;
     }
-    .steps::before{
-      content:"";
-      position:absolute;
-      top:1.15rem;
-      left:0; right:0;
-      height:1px;
-      background:linear-gradient(90deg,transparent,#2a2a2a,transparent);
-      z-index:-1;
+    .process-card:hover{
+      transform:translateY(-3px);
+      border-color:rgba(0,255,136,.35);
+      box-shadow:
+        0 22px 55px rgba(0,0,0,.45),
+        0 0 18px rgba(0,255,136,.12),
+        inset 0 1px 0 rgba(255,255,255,.05);
     }
-    .step{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:14px;
-      min-height:145px;
-      padding:16px;
-      transition:.25s ease;
-    }
-    .step:hover{
-      border-color:#3a3a3a;
-      transform:translateY(-2px);
-    }
-    .step .num{
+    .process-num{
       color:var(--accent);
-      font-weight:700;
-      font-size:.92rem;
-      margin-bottom:.42rem;
+      font-weight:800;
+      letter-spacing:.08em;
+      font-size:1.05rem;
+      margin-bottom:.9rem;
     }
-    .step p{
-      font-size:1.02rem;
-      line-height:1.35;
-      font-weight:600;
-      color:#efefef;
+    .process-text{
+      font-size:1.2rem;
+      font-weight:700;
+      color:#F2F2F2;
+      line-height:1.25;
+      margin:0;
     }
 
-    footer{text-align:center}
+    /* Footer */
     footer h3{
-      font-size:clamp(1.6rem,3vw,2.3rem);
-      margin-bottom:.5rem;
+      font-size:1.6rem;
+      margin-bottom:.4rem;
     }
     footer p{
-      color:#cfcfcf;
-      max-width:720px;
-      margin:0 auto;
+      color:var(--muted);
+      margin-bottom:1.2rem;
     }
-    footer .links{
-      margin-top:12px;
-      display:flex;
-      justify-content:center;
-      gap:16px;
-      flex-wrap:wrap;
-    }
-    footer .links a{
+    .links{display:flex;flex-direction:column;gap:.6rem}
+    .links a{
       color:var(--accent);
+      font-weight:500;
+      transition:.2s ease;
     }
-    footer .links a:hover{
-      text-decoration:underline;
+    .links a:hover{
+      opacity:.75;
     }
 
-    /* Reveal */
-    .reveal{
-      opacity:0;
-      transform:translateY(18px) scale(.985);
-      transition:opacity .65s ease,transform .65s ease;
+    /* Animations */
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(30px)}
+      to{opacity:1;transform:translateY(0)}
     }
-    .reveal.show{
-      opacity:1;
-      transform:translateY(0) scale(1);
-    }
+    .reveal{opacity:0;transform:translateY(40px);transition:all .6s ease}
+    .reveal.show{opacity:1;transform:translateY(0)}
 
     /* Modal */
     .modal{
-      position:fixed; inset:0;
-      display:none; align-items:center; justify-content:center;
-      background:rgba(0,0,0,.82);
-      z-index:999;
+      display:none;
+      position:fixed;inset:0;
+      z-index:9999;
+      background:rgba(0,0,0,.92);
+      align-items:center;justify-content:center;
       padding:1rem;
     }
     .modal.open{display:flex}
-
     .modal-content{
-      width:min(1000px,95vw);
-      max-height:90vh;
-      border:1px solid #2d2d2d;
-      border-radius:14px;
-      overflow:hidden;
-      background:#000;
       position:relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      width:100%;max-width:90vw;
+      max-height:90vh;
     }
-
-    .modal-content video,.modal-content iframe{
+    .modal-content.is-landscape{max-width:90vw}
+    .modal-content.is-portrait{max-width:min(90vw,60vh)}
+    .modal-content video,
+    .modal-content iframe{
       width:100%;
       height:100%;
-      border:0;
-      object-fit:contain;
-      background:#000;
+      border-radius:8px;
     }
-
-    .modal-content.is-portrait{
-      width:min(420px,95vw);
-      height:min(90vh, calc(95vw * 16 / 9));
+    .modal-content iframe{
+      aspect-ratio:16/9;
     }
-
-    .modal-content.is-landscape{
-      width:min(1100px,95vw);
-      height:min(90vh, calc(95vw * 9 / 16));
-    }
-
     .close{
-      position:absolute;top:.55rem;right:.55rem;
-      width:34px;height:34px;border-radius:50%;
-      border:1px solid #333;background:rgba(10,10,10,.75);
-      color:#fff;cursor:pointer;z-index:2;
+      position:absolute;
+      top:-35px;right:0;
+      background:none;border:none;
+      color:#fff;font-size:2rem;
+      cursor:pointer;z-index:10000;
+      transition:.2s ease;
     }
+    .close:hover{color:var(--accent)}
 
-    @keyframes fadeUp{
-      from{opacity:0;transform:translateY(15px)}
-      to{opacity:1;transform:translateY(0)}
+    /* Responsive */
+    @media(max-width:900px){
+      .process-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
-
-    @media (max-width:980px){
-      .focus-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media(max-width:768px){
       .work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .focus-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
-    @media (max-width:640px){
-      section{padding:4.2rem 0}
-      .work-grid,.focus-grid{grid-template-columns:1fr}
-
-      #skills { padding:4rem 0 2rem; }
-      #process { padding:2rem 0 3rem; }
-
-      .steps{grid-template-columns:1fr}
-      .steps::before{display:none}
-      .step{min-height:auto}
+    @media(max-width:520px){
+      .process-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:480px){
+      .work-grid{grid-template-columns:1fr}
+      .focus-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
-
   <!-- HERO -->
-  <header class="hero" id="home">
-    <video autoplay muted loop playsinline preload="metadata">
-      <source src="assets/hero-reel-web.mp4" type="video/mp4" />
+  <section class="hero">
+    <video id="heroVideo" muted loop playsinline preload="none">
+      <source src="assets/hero-reel-web-opt.mp4" type="video/mp4" />
     </video>
 
-    <div class="hero-content container">
+    <!-- NOTE: Removed wrong <div class="hero::after"></div> because ::after is a CSS pseudo-element -->
+
+    <div class="hero-content">
       <h1>Vekstrom</h1>
       <p>Motion-driven edits that keep people watching</p>
       <div class="hero-cta">
-        <a href="#work" class="btn btn-primary">View Work</a>
+        <button class="btn btn-primary" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">View Work</button>
         <a href="mailto:viveklodhi12312@gmail.com?subject=Project%20Inquiry%20-%20Vekstrom" class="btn">Start a Project</a>
       </div>
     </div>
-  </header>
+  </section>
 
-  <!-- WHAT I FOCUS ON -->
+  <!-- FOCUS -->
   <section class="reveal">
     <div class="container">
       <h2 class="section-title">What I Focus On</h2>
       <div class="focus-grid">
-        <article class="focus-card">
+        <div class="focus-card">
           <h3>Hook-first storytelling</h3>
           <p>Edits structured to grab attention in the first seconds.</p>
-        </article>
-        <article class="focus-card">
+        </div>
+        <div class="focus-card">
           <h3>Retention pacing</h3>
           <p>Rhythm, cuts, and motion designed to reduce drop-off.</p>
-        </article>
-        <article class="focus-card">
+        </div>
+        <div class="focus-card">
           <h3>Clean motion design</h3>
           <p>Purposeful graphics that support message clarity.</p>
-        </article>
-        <article class="focus-card">
+        </div>
+        <div class="focus-card">
           <h3>Reliable collaboration</h3>
           <p>Clear communication, revisions, and delivery discipline.</p>
-        </article>
+        </div>
       </div>
     </div>
   </section>
@@ -430,19 +425,18 @@
       <div class="work-head">
         <h2 class="section-title">Selected Work</h2>
         <div class="filters">
-          <button class="filter-btn" data-filter="all">All</button>
+          <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="Short Form Edits">Short Form Edits</button>
           <button class="filter-btn" data-filter="Motion Graphics">Motion Graphics</button>
           <button class="filter-btn" data-filter="Trading / Chart Edits">Trading / Chart Edits</button>
           <button class="filter-btn" data-filter="Cinematic">Cinematic</button>
         </div>
       </div>
-
-      <div class="work-grid" id="workGrid">
-        <article class="card" data-category="Short Form Edits" data-type="local" data-src="assets/shortform/sf-01.mp4">
+      <div class="work-grid">
+        <article class="card" data-category="Short Form Edits" data-type="local" data-src="assets/shortform/sf-01-opt.mp4">
           <div class="thumb">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="assets/shortform/sf-01.mp4" type="video/mp4" />
+            <video muted playsinline preload="none">
+              <source src="assets/shortform/sf-01-opt.mp4" type="video/mp4" />
             </video>
           </div>
           <div class="card-body">
@@ -451,10 +445,10 @@
           </div>
         </article>
 
-        <article class="card" data-category="Short Form Edits" data-type="local" data-src="assets/shortform/sf-02.mp4">
+        <article class="card" data-category="Short Form Edits" data-type="local" data-src="assets/shortform/sf-02-opt.mp4">
           <div class="thumb">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="assets/shortform/sf-02.mp4" type="video/mp4" />
+            <video muted playsinline preload="none">
+              <source src="assets/shortform/sf-02-opt.mp4" type="video/mp4" />
             </video>
           </div>
           <div class="card-body">
@@ -463,10 +457,10 @@
           </div>
         </article>
 
-        <article class="card" data-category="Motion Graphics" data-type="local" data-src="assets/motion/mo-01.mp4">
+        <article class="card" data-category="Motion Graphics" data-type="local" data-src="assets/motion/mo-01-opt.mp4">
           <div class="thumb">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="assets/motion/mo-01.mp4" type="video/mp4" />
+            <video muted playsinline preload="none">
+              <source src="assets/motion/mo-01-opt.mp4" type="video/mp4" />
             </video>
           </div>
           <div class="card-body">
@@ -475,10 +469,10 @@
           </div>
         </article>
 
-        <article class="card" data-category="Motion Graphics" data-type="local" data-src="assets/motion/mo-02.mp4">
+        <article class="card" data-category="Motion Graphics" data-type="local" data-src="assets/motion/mo-02-opt.mp4">
           <div class="thumb">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="assets/motion/mo-02.mp4" type="video/mp4" />
+            <video muted playsinline preload="none">
+              <source src="assets/motion/mo-02-opt.mp4" type="video/mp4" />
             </video>
           </div>
           <div class="card-body">
@@ -487,10 +481,10 @@
           </div>
         </article>
 
-        <article class="card" data-category="Trading / Chart Edits" data-type="local" data-src="assets/trading/tr-01.mp4">
+        <article class="card" data-category="Trading / Chart Edits" data-type="local" data-src="assets/trading/tr-01-opt.mp4">
           <div class="thumb">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="assets/trading/tr-01.mp4" type="video/mp4" />
+            <video muted playsinline preload="none">
+              <source src="assets/trading/tr-01-opt.mp4" type="video/mp4" />
             </video>
           </div>
           <div class="card-body">
@@ -499,10 +493,10 @@
           </div>
         </article>
 
-        <article class="card" data-category="Trading / Chart Edits" data-type="local" data-src="assets/trading/tr-02.mp4">
+        <article class="card" data-category="Trading / Chart Edits" data-type="local" data-src="assets/trading/tr-02-opt.mp4">
           <div class="thumb">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="assets/trading/tr-02.mp4" type="video/mp4" />
+            <video muted playsinline preload="none">
+              <source src="assets/trading/tr-02-opt.mp4" type="video/mp4" />
             </video>
           </div>
           <div class="card-body">
@@ -511,10 +505,10 @@
           </div>
         </article>
 
-        <article class="card" data-category="Cinematic" data-type="local" data-src="assets/cinematic/ci-01.mp4">
+        <article class="card" data-category="Cinematic" data-type="local" data-src="assets/cinematic/ci-01-opt.mp4">
           <div class="thumb">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="assets/cinematic/ci-01.mp4" type="video/mp4" />
+            <video muted playsinline preload="none">
+              <source src="assets/cinematic/ci-01-opt.mp4" type="video/mp4" />
             </video>
           </div>
           <div class="card-body">
@@ -523,10 +517,10 @@
           </div>
         </article>
 
-        <article class="card" data-category="Cinematic" data-type="local" data-src="assets/cinematic/ci-02.mp4">
+        <article class="card" data-category="Cinematic" data-type="local" data-src="assets/cinematic/ci-02-opt.mp4">
           <div class="thumb">
-            <video autoplay muted loop playsinline preload="metadata">
-              <source src="assets/cinematic/ci-02.mp4" type="video/mp4" />
+            <video muted playsinline preload="none">
+              <source src="assets/cinematic/ci-02-opt.mp4" type="video/mp4" />
             </video>
           </div>
           <div class="card-body">
@@ -563,15 +557,34 @@
     </div>
   </section>
 
-  <!-- PROCESS -->
+  <!-- PROCESS (UPDATED) -->
   <section id="process" class="reveal">
     <div class="container">
-      <h2 class="section-title">Process</h2>
-      <div class="steps">
-        <article class="step"><div class="num">01</div><p>Understand idea</p></article>
-        <article class="step"><div class="num">02</div><p>Plan visuals</p></article>
-        <article class="step"><div class="num">03</div><p>Edit with motion & rhythm</p></article>
-        <article class="step"><div class="num">04</div><p>Deliver optimized content</p></article>
+      <div class="process-head">
+        <h2 class="process-title">Process</h2>
+        <span class="process-underline" aria-hidden="true"></span>
+      </div>
+
+      <div class="process-grid">
+        <article class="process-card">
+          <div class="process-num">01</div>
+          <h3 class="process-text">Understand idea</h3>
+        </article>
+
+        <article class="process-card">
+          <div class="process-num">02</div>
+          <h3 class="process-text">Plan visuals</h3>
+        </article>
+
+        <article class="process-card">
+          <div class="process-num">03</div>
+          <h3 class="process-text">Edit with motion & rhythm</h3>
+        </article>
+
+        <article class="process-card">
+          <div class="process-num">04</div>
+          <h3 class="process-text">Deliver optimized content</h3>
+        </article>
       </div>
     </div>
   </section>
@@ -579,7 +592,7 @@
   <!-- CONTACT -->
   <footer id="contact" class="reveal">
     <div class="container">
-      <h3>Let’s work together</h3>
+      <h3>Let's work together</h3>
       <p>Available for creators, brands, and long-term collaborations.</p>
       <div class="links">
         <a href="https://instagram.com/vekstrom_07" target="_blank" rel="noopener">Instagram: @vekstrom_07</a>
@@ -597,47 +610,85 @@
   </div>
 
   <script>
-    // Scroll reveal
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          e.target.classList.add('show');
-          io.unobserve(e.target);
+    // ============ HERO VIDEO LAZY LOADING ============
+    const heroVideo = document.getElementById('heroVideo');
+    const heroSection = document.querySelector('.hero');
+
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Hero is visible - load and play video
+          heroVideo.autoplay = true;
+          heroVideo.play().catch(() => {});
+        } else {
+          // Hero not visible - pause to save bandwidth
+          heroVideo.pause();
         }
       });
-    },{threshold:.14});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    }, { threshold: 0.5 });
 
-    // Ensure all card videos try to play immediately
-    document.querySelectorAll('.card video').forEach(v=>{
-      v.play().catch(()=>{});
-    });
+    heroObserver.observe(heroSection);
 
-    // Filters
+    // ============ SCROLL REVEAL ============
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          scrollObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach(el => scrollObserver.observe(el));
+
+    // ============ CARD VIDEO LAZY LOADING ============
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target.querySelector('video');
+        if (!video) return;
+
+        if (entry.isIntersecting) {
+          // Card is visible - load and play video
+          video.autoplay = true;
+          video.preload = 'metadata';
+          video.play().catch(() => {});
+        } else {
+          // Card not visible - pause to save bandwidth
+          video.pause();
+          video.preload = 'none';
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '50px' });
+
+    document.querySelectorAll('.card').forEach(card => cardObserver.observe(card));
+
+    // ============ FILTERS ============
     const filterBtns = document.querySelectorAll('.filter-btn');
     const cards = document.querySelectorAll('.card');
-    filterBtns.forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        filterBtns.forEach(b=>b.classList.remove('active'));
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const filter = btn.dataset.filter;
-        cards.forEach(card=>{
+
+        cards.forEach(card => {
           const ok = filter === 'all' || card.dataset.category === filter;
           card.style.display = ok ? '' : 'none';
         });
       });
     });
 
-    // Modal player
+    // ============ MODAL PLAYER ============
     const modal = document.getElementById('modal');
     const modalContent = document.querySelector('.modal-content');
     const player = document.getElementById('player');
     const closeModal = document.getElementById('closeModal');
 
-    function setModalRatioClass(type, src){
-      modalContent.classList.remove('is-portrait','is-landscape');
+    function setModalRatioClass(type, src) {
+      modalContent.classList.remove('is-portrait', 'is-landscape');
 
-      if(type === 'youtube'){
+      if (type === 'youtube') {
         modalContent.classList.add('is-landscape');
         return;
       }
@@ -656,13 +707,13 @@
       };
     }
 
-    function openModal(type,src){
+    function openModal(type, src) {
       modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
+      modal.setAttribute('aria-hidden', 'false');
 
       setModalRatioClass(type, src);
 
-      if(type === 'youtube'){
+      if (type === 'youtube') {
         player.innerHTML = `
           <iframe
             src="https://www.youtube.com/embed/${src}?autoplay=1&rel=0"
@@ -677,20 +728,26 @@
       }
     }
 
-    function closePlayer(){
+    function closePlayer() {
       modal.classList.remove('open');
-      modal.setAttribute('aria-hidden','true');
-      modalContent.classList.remove('is-portrait','is-landscape');
+      modal.setAttribute('aria-hidden', 'true');
+      modalContent.classList.remove('is-portrait', 'is-landscape');
       player.innerHTML = '';
     }
 
-    cards.forEach(card=>{
-      card.addEventListener('click',()=> openModal(card.dataset.type, card.dataset.src));
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        openModal(card.dataset.type, card.dataset.src);
+      });
     });
 
     closeModal.addEventListener('click', closePlayer);
-    modal.addEventListener('click',e=>{ if(e.target===modal) closePlayer(); });
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closePlayer(); });
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closePlayer();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closePlayer();
+    });
   </script>
 </body>
 </html>
